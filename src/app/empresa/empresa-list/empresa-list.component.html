@@ -1,0 +1,67 @@
+<form #form="ngForm" novalidate>
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col">
+      <label for="cnpj">CNPJ</label>
+      <input id="cnpj" type="text" pInputText>
+    </div>
+    <div class="p-field p-col">
+      <label for="nome">Nome da Empresa</label>
+      <input id="nome" type="text" pInputText>
+    </div>
+    <div class="p-field p-col">
+      <label for="tipo">Tipo de Empresa</label>
+      <p-dropdown id="tipo" [options]="tipos" [(ngModel)]="selectedTipo"
+                  placeholder="Selecione um tipo" optionLabel="nome"
+                  [showClear]="true"></p-dropdown>
+      <p>Selected City: {{selectedTipo || 'none'}}</p>
+    </div>
+  </div>
+</form>
+
+<p-table [columns]="cols" [value]="empresas" [lazy]="true"
+         (onLazyLoad)="loadDataLazy($event)" dataKey="id" editMode="row"
+         [totalRecords]="empresas.length" [paginator]="true" rows="5">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>CNPJ</th>
+      <th>Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-editing="editing" let-ri="rowIndex">
+    <tr [pEditableRow]="rowData">
+      <td>
+        {{rowData.id}}
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="summary" let-rowData>
+    <div style="text-align:left">
+      <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add"></button>
+    </div>
+  </ng-template>
+</p-table>
+
+<p-dialog header="Car Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="true" [style]="{'width':'300px'}">
+  <div class="ui-g ui-fluid" *ngIf="car">
+    <div class="ui-g-4"><label for="vin">Vin</label></div>
+    <div class="ui-g-8"><input pInputText id="vin" [(ngModel)]="car.vin" /></div>
+
+    <div class="ui-g-4"><label for="year">Year</label></div>
+    <div class="ui-g-8"><input pInputText id="year" [(ngModel)]="car.year" /></div>
+
+    <div class="ui-g-4"><label for="brand">Brand</label></div>
+    <div class="ui-g-8"><input pInputText id="brand" [(ngModel)]="car.brand" /></div>
+
+    <div class="ui-g-4"><label for="color">Color</label></div>
+    <div class="ui-g-8"><input pInputText id="color" [(ngModel)]="car.color" /></div>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="pi pi-times" (click)="delete()" label="Delete"></button>
+      <button type="button" pButton icon="pi pi-check" (click)="save()" label="Save"></button>
+    </div>
+  </p-footer>
+</p-dialog>
