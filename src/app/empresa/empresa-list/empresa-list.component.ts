@@ -18,6 +18,7 @@ export class EmpresaListComponent implements OnInit {
   cols: any[];
   tipos: SelectItem[];
   selectedTipo: string;
+  empresaExclusao: EmpresaModel;
 
   constructor(private empresaService: EmpresaService) { }
 
@@ -55,10 +56,6 @@ export class EmpresaListComponent implements OnInit {
     );
   }
 
-    showDialogToAdd() {
-    this.displayDialog = true;
-  }
-
   save() {
     this.displayDialog = false;
   }
@@ -76,4 +73,8 @@ export class EmpresaListComponent implements OnInit {
     return this.empresas.indexOf(this.selectedEmpresa);
   }
 
+  abrirModalExclusao(empresa: EmpresaModel) {
+    this.empresaExclusao = empresa;
+    this.displayDialog = true;
+  }
 }
