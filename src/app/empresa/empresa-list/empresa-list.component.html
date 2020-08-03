@@ -23,7 +23,7 @@
 
 <p-table [value]="empresas" [lazy]="true"
          (onLazyLoad)="loadDataLazy($event)" dataKey="id" editMode="row"
-         [totalRecords]="empresas.length" [paginator]="true" rows="5">
+         [totalRecords]="total" [paginator]="true" rows="5">
   <ng-template pTemplate="header">
     <tr>
       <th>Id</th>
