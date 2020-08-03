@@ -21,7 +21,7 @@ export class EmpresaService {
     params.append('nome', nome);
     params.append('tipoEmpresa', tipoEmpresa);
 
-    return this.http.get<EmpresaModel[]>(`${this.endpointAPI}/empresas`, {params});
+    return this.http.get<any>(`${this.endpointAPI}/empresas`, {params});
   }
 
   buscarMatrizes() {

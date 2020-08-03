@@ -20,6 +20,7 @@ export class EmpresaListComponent implements OnInit {
   tipos: SelectItem[] = [];
   selectedTipo: string;
   empresaExclusao: EmpresaModel;
+  total = 0;
 
   constructor(private empresaService: EmpresaService) { }
 
@@ -43,6 +44,7 @@ export class EmpresaListComponent implements OnInit {
       dataPaginated => {
         console.log(' pageable data:', this.empresas);
         this.empresas = dataPaginated;
+        this.total = dataPaginated.totalElements;
       },
       error => {
         console.log('error fetching paginated data', error);
