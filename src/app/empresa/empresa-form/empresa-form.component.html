@@ -1,1 +1,31 @@
-<p>empresa-form works!</p>
+<h3>Advanced</h3>
+<form #form="ngForm" novalidate>
+  <div class="ui-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 p-md-6">
+      <label for="cnpj" class="required">CNPJ</label>
+      <p-inputMask id="cnpj" mask="99.999.999/9999-99" [(ngModel)]="empresa.cnpj"></p-inputMask>
+    </div>
+    <div class="p-field p-col-12 p-md-4">
+      <label for="tipo" class="required">Tipo de Empresa</label>
+      <p-dropdown inputId="tipo" [options]="tipos" [(ngModel)]="empresa.tipoEmpresa"
+                  placeholder="Selecione um tipo" optionLabel="nome"
+                  [showClear]="true"></p-dropdown>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <label for="nome" class="required">Nome da Empresa</label>
+      <input id="nome" type="text" pInputText [(ngModel)]="empresa.tipoEmpresa">
+    </div>
+    <div class="p-field p-col-12">
+      <label for="address">Address</label>
+      <textarea id="address" type="text" rows="4" pInputTextarea></textarea>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <label for="city">City</label>
+      <input id="city" type="text" pInputText>
+    </div>
+    <div class="p-field p-col-12 p-md-3">
+      <label for="zip">Zip</label>
+      <input id="zip" type="text" pInputText>
+    </div>
+  </div>
+</form>

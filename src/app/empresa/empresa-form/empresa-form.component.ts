@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SelectItem } from 'primeng';
+import { EmpresaModel } from '../../models/empresa.model';
 
 @Component({
   selector: 'app-empresa-form',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmpresaFormComponent implements OnInit {
 
+  tipos: SelectItem[];
+  empresa: EmpresaModel;
+
   constructor() { }
 
   ngOnInit(): void {
+    this.tipos = [
+      { label: 'Todos', value: '' },
+      { label: 'Matriz', value: 'MATRIZ' },
+      { label: 'Filial', value: 'FILIAL' },
+    ];
   }
 
 }

@@ -15,7 +15,8 @@ export class EmpresaListComponent implements OnInit {
 
   empresas: EmpresaModel[];
   selectedEmpresa: any;
-  cols: any[];
+  cnpj: string;
+  nomeEmpresa: string;
   tipos: SelectItem[];
   selectedTipo: string;
   empresaExclusao: EmpresaModel;
@@ -23,15 +24,7 @@ export class EmpresaListComponent implements OnInit {
   constructor(private empresaService: EmpresaService) { }
 
   ngOnInit() {
-
     this.empresaService.buscarTodos().subscribe(res => this.empresas = res);
-
-    this.cols = [
-      { field: 'id', header: 'Id' },
-      { field: 'nome', header: 'Nome' },
-      { field: 'cnpj', header: 'CNPJ' },
-      { field: 'acoes', header: 'Ações' }
-    ];
 
     this.tipos = [
       { label: 'Todos', value: '' },
@@ -45,7 +38,7 @@ export class EmpresaListComponent implements OnInit {
       page: event.first / 10,
       size: event.rows
     };
-    this.empresaService.buscarTodos(pageableData).subscribe(
+    this.empresaService.buscarTodos(pageableData, this.cnpj, this.nomeEmpresa, this.selectedTipo).subscribe(
       dataPaginated => {
         console.log(' pageable data:', this.empresas);
         this.empresas = dataPaginated;
@@ -56,12 +49,30 @@ export class EmpresaListComponent implements OnInit {
     );
   }
 
-  save() {
+  buscar() {
+    const pageableData: PageableModel = {
+      page: 0,
+      size: 5
+    };
+
+    this.empresaService.buscarTodos(pageableData, this.cnpj, this.nomeEmpresa, this.selectedTipo).subscribe(
+      dataPaginated => {
+        console.log(' pageable data:', this.empresas);
+        this.empresas = dataPaginated;
+      },
+      error => {
+        console.log('error fetching paginated data', error);
+      }
+    );
+  }
+
+  cancelar() {
     this.displayDialog = false;
   }
 
-  delete() {
+  delete(id: number) {
     const index = this.findSelectedEmpresaIndex();
+    this.empresaService.excluir(id);
     this.displayDialog = false;
   }
 
