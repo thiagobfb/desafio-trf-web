@@ -17,13 +17,14 @@ export class EmpresaListComponent implements OnInit {
   selectedEmpresa: any;
   cnpj: string;
   nomeEmpresa: string;
-  tipos: SelectItem[];
+  tipos: SelectItem[] = [];
   selectedTipo: string;
   empresaExclusao: EmpresaModel;
 
   constructor(private empresaService: EmpresaService) { }
 
   ngOnInit() {
+    this.displayDialog = false;
     this.empresaService.buscarTodos({page: 0, size: 5}).subscribe(res => this.empresas = res);
 
     this.tipos = [
