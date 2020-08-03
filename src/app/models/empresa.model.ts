@@ -13,6 +13,5 @@ export interface EmpresaModel {
   logradouro: string;
   complemento?: string;
 
-  matriz: EmpresaModel;
-  filiais: EmpresaModel[];
+  matriz?: EmpresaModel;
 }

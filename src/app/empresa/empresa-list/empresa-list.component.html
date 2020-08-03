@@ -2,16 +2,16 @@
   <div class="p-fluid p-formgrid p-grid">
     <div class="p-field p-col">
       <label for="cnpj">CNPJ</label>
-      <input id="cnpj" type="text" pInputText [(ngModel)]="cnpj">
+      <input id="cnpj" type="text" pInputText [(ngModel)]="cnpj" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="p-field p-col">
       <label for="nome">Nome da Empresa</label>
-      <input id="nome" type="text" pInputText [(ngModel)]="nomeEmpresa">
+      <input id="nome" type="text" pInputText [(ngModel)]="nomeEmpresa" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="p-field p-col">
       <label for="tipo">Tipo de Empresa</label>
       <p-dropdown inputId="tipo" [options]="tipos" [(ngModel)]="selectedTipo"
-                  placeholder="Selecione um tipo" optionLabel="nome"
+                  placeholder="Selecione um tipo" optionLabel="nome" [ngModelOptions]="{standalone: true}"
                   [showClear]="true"></p-dropdown>
     </div>
   </div>
@@ -21,7 +21,7 @@
   </div>
 </form>
 
-<p-table [columns]="cols" [value]="empresas" [lazy]="true"
+<p-table [value]="empresas" [lazy]="true"
          (onLazyLoad)="loadDataLazy($event)" dataKey="id" editMode="row"
          [totalRecords]="empresas.length" [paginator]="true" rows="5">
   <ng-template pTemplate="header">

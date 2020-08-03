@@ -24,6 +24,10 @@ export class EmpresaService {
     return this.http.get<EmpresaModel[]>(`${this.endpointAPI}/empresas`, {params});
   }
 
+  buscarMatrizes() {
+    return this.http.get<EmpresaModel[]>(`${this.endpointAPI}/empresas/matrizes`);
+  }
+
   buscarPorId(id: number) {
     return this.http.get<EmpresaModel>(`${this.endpointAPI}/empresas/${id}`);
   }

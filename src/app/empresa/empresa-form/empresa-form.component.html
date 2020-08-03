@@ -1,31 +1,51 @@
 <h3>Advanced</h3>
-<form #form="ngForm" novalidate>
+<form #form="ngForm" (ngSubmit)="salvarAtualizar()" novalidate>
   <div class="ui-fluid p-formgrid p-grid">
+    <h3>{{ titulo }}</h3>
     <div class="p-field p-col-12 p-md-6">
       <label for="cnpj" class="required">CNPJ</label>
-      <p-inputMask id="cnpj" mask="99.999.999/9999-99" [(ngModel)]="empresa.cnpj"></p-inputMask>
+      <p-inputMask id="cnpj" mask="99.999.999/9999-99" [(ngModel)]="empresa.cnpj" required></p-inputMask>
     </div>
     <div class="p-field p-col-12 p-md-4">
-      <label for="tipo" class="required">Tipo de Empresa</label>
-      <p-dropdown inputId="tipo" [options]="tipos" [(ngModel)]="empresa.tipoEmpresa"
-                  placeholder="Selecione um tipo" optionLabel="nome"
-                  [showClear]="true"></p-dropdown>
+      <label for="tipoEmpresa" class="required">Tipo de Empresa</label>
+      <p-dropdown inputId="tipoEmpresa" [options]="tipos" [(ngModel)]="empresa.tipoEmpresa"
+                  placeholder="Selecione um tipo" optionLabel="nome" (onChange)="buscarMatrizes()"
+                  [showClear]="true" required></p-dropdown>
+    </div>
+    <div *ngIf="empresa.tipoEmpresa == 'FILIAL'" class="p-field p-col-12 p-md-8">
+      <label for="matriz" class="required">Matriz</label>
+      <p-dropdown inputId="matriz" [options]="matrizes" [(ngModel)]="empresa.matriz"
+                  placeholder="Selecione uma Matriz" optionLabel="nome"
+                  [showClear]="true" required></p-dropdown>
     </div>
     <div class="p-field p-col-12 p-md-6">
       <label for="nome" class="required">Nome da Empresa</label>
-      <input id="nome" type="text" pInputText [(ngModel)]="empresa.tipoEmpresa">
+      <input id="nome" type="text" pInputText [(ngModel)]="empresa.nome" required>
     </div>
-    <div class="p-field p-col-12">
-      <label for="address">Address</label>
-      <textarea id="address" type="text" rows="4" pInputTextarea></textarea>
+    <div class="p-field p-col-12 p-md-4">
+      <label for="razaoSocial" class="required">Razão Social</label>
+      <input id="razaoSocial" type="text" pInputText [(ngModel)]="empresa.razaoSocial" required>
     </div>
     <div class="p-field p-col-12 p-md-6">
-      <label for="city">City</label>
-      <input id="city" type="text" pInputText>
+      <label for="cep" class="required">CEP</label>
+      <p-inputMask id="cep" mask="99999-999" [(ngModel)]="empresa.cep" required></p-inputMask>
+      <button pButton type="button" icon="pi pi-check" iconPos="right" (click)="buscaEndereco()" label="Busca CEP"></button>
     </div>
-    <div class="p-field p-col-12 p-md-3">
-      <label for="zip">Zip</label>
-      <input id="zip" type="text" pInputText>
+    <div class="p-field p-col-12 p-md-6">
+      <label for="estado" class="required">Estado</label>
+      <input id="estado" type="text" pInputText [(ngModel)]="empresa.estado" required>
     </div>
+    <div class="p-field p-col-12 p-md-6">
+      <label for="logradouro" class="required">Logradouro</label>
+      <input id="logradouro" type="text" pInputText [(ngModel)]="empresa.logradouro" required>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <label for="complemento">Complemento</label>
+      <input id="complemento" type="text" pInputText [(ngModel)]="empresa.complemento">
+    </div>
+  </div>
+  <div class="ui-fluid p-formgrid p-grid">
+    <button pButton type="button" icon="pi pi-list" [routerLink]="['/empresas-lista']" label="Lista de Empresas"></button>
+    <button pButton type="submit" icon="pi pi-save" iconPos="right" label="Salvar"></button>
   </div>
 </form>
