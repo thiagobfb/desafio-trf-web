@@ -34,13 +34,21 @@
       <td>
         {{rowData.id}}
       </td>
+      <td>
+        <ng-template pTemplate="output">
+          {{rowData.nome}}
+        </ng-template>
+      </td>
+      <td>
+        <ng-template pTemplate="output">
+          {{rowData.cnpj}}
+        </ng-template>
+      </td>
+      <td>
+        <button pButton type="button" icon="pi pi-pencil" routerLink="/:id"></button>
+        <button pButton type="button" icon="pi pi-trash" (click)="abrirModalExclusao(rowData)"></button>
+      </td>
     </tr>
-  </ng-template>
-
-  <ng-template pTemplate="summary" let-rowData>
-    <div style="text-align:left">
-      <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add"></button>
-    </div>
   </ng-template>
 </p-table>
 
