@@ -42,9 +42,9 @@ export class EmpresaListComponent implements OnInit {
     };
     this.empresaService.buscarTodos(pageableData, this.cnpj, this.nomeEmpresa, this.selectedTipo).subscribe(
       dataPaginated => {
-        console.log(' pageable data:', this.empresas);
+        //console.log(' pageable data:', this.empresas.content);
         this.empresas = dataPaginated;
-        this.total = dataPaginated.totalElements;
+        this.total = dataPaginated['totalElements'];
       },
       error => {
         console.log('error fetching paginated data', error);
@@ -74,17 +74,8 @@ export class EmpresaListComponent implements OnInit {
   }
 
   delete(id: number) {
-    const index = this.findSelectedEmpresaIndex();
     this.empresaService.excluir(id);
     this.displayDialog = false;
-  }
-
-  onRowSelect(event) {
-    this.displayDialog = true;
-  }
-
-  findSelectedEmpresaIndex(): number {
-    return this.empresas.indexOf(this.selectedEmpresa);
   }
 
   abrirModalExclusao(empresa: EmpresaModel) {

@@ -15,19 +15,7 @@ export class EmpresaFormComponent implements OnInit {
   id: string;
   tipos: SelectItem[];
   matrizes: EmpresaModel[];
-  empresa: EmpresaModel = { estado: null,
-                            cidade: null,
-                            complemento: null,
-                            tipoEmpresa: null,
-                            bairro: null,
-                            logradouro: null,
-                            nome: null,
-                            cnpj: null,
-                            razaoSocial: null,
-                            contato: null,
-                            email: null,
-                            cep: null,
-                            matriz: null};
+  empresa: EmpresaModel;
   titulo: string;
 
   constructor(private route: ActivatedRoute,
@@ -43,7 +31,7 @@ export class EmpresaFormComponent implements OnInit {
       { label: 'Filial', value: 'FILIAL' },
     ];
 
-    this.id ? this.editarEmpresa() : this.titulo = 'Cadastro de Empresa';
+    this.id ? this.editarEmpresa() : this.preparaCadastro();
   }
 
   editarEmpresa() {
@@ -74,5 +62,24 @@ export class EmpresaFormComponent implements OnInit {
 
   buscarMatrizes() {
     this.empresaService.buscarMatrizes().subscribe(res => this.matrizes = res);
+  }
+
+  private preparaCadastro() {
+    this.titulo = 'Cadastro de Empresa';
+    this.empresa = {
+      estado: null,
+      cidade: null,
+      complemento: null,
+      tipoEmpresa: null,
+      bairro: null,
+      logradouro: null,
+      nome: null,
+      cnpj: null,
+      razaoSocial: null,
+      contato: null,
+      email: null,
+      cep: null,
+      matriz: null
+    };
   }
 }

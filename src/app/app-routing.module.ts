@@ -5,6 +5,7 @@ import { EmpresaListComponent } from './empresa/empresa-list/empresa-list.compon
 
 
 const routes: Routes = [
+  { path: '', redirectTo: '/empresas-lista', pathMatch: 'full' },
   { path: 'empresas', component: EmpresaFormComponent },
   { path: 'empresas/:id', component: EmpresaFormComponent },
   { path: 'empresas-lista', component: EmpresaListComponent }

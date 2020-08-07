@@ -1,47 +1,46 @@
-<h3>Advanced</h3>
+<h3>{{ titulo }}</h3>
 <form #form="ngForm" (ngSubmit)="salvarAtualizar()" novalidate>
   <div class="ui-fluid p-formgrid p-grid">
-    <h3>{{ titulo }}</h3>
     <div class="p-field p-col-12 p-md-6">
       <label for="cnpj" class="required">CNPJ</label>
-      <p-inputMask id="cnpj" mask="99.999.999/9999-99" [(ngModel)]="empresa.cnpj" required></p-inputMask>
+      <p-inputMask id="cnpj" name="cnpj" mask="99.999.999/9999-99" [(ngModel)]="empresa.cnpj" required></p-inputMask>
     </div>
     <div class="p-field p-col-12 p-md-4">
       <label for="tipoEmpresa" class="required">Tipo de Empresa</label>
-      <p-dropdown inputId="tipoEmpresa" [options]="tipos" [(ngModel)]="empresa.tipoEmpresa"
+      <p-dropdown inputId="tipoEmpresa" name="tipoEmpresa" [options]="tipos" [(ngModel)]="empresa.tipoEmpresa"
                   placeholder="Selecione um tipo" optionLabel="nome" (onChange)="buscarMatrizes()"
                   [showClear]="true" required></p-dropdown>
     </div>
     <div *ngIf="empresa.tipoEmpresa == 'FILIAL'" class="p-field p-col-12 p-md-8">
       <label for="matriz" class="required">Matriz</label>
-      <p-dropdown inputId="matriz" [options]="matrizes" [(ngModel)]="empresa.matriz"
+      <p-dropdown inputId="matriz" name="matriz" [options]="matrizes" [(ngModel)]="empresa.matriz"
                   placeholder="Selecione uma Matriz" optionLabel="nome"
                   [showClear]="true" required></p-dropdown>
     </div>
     <div class="p-field p-col-12 p-md-6">
       <label for="nome" class="required">Nome da Empresa</label>
-      <input id="nome" type="text" pInputText [(ngModel)]="empresa.nome" required>
+      <input id="nome" type="text" pInputText name="nome" [(ngModel)]="empresa.nome" required>
     </div>
     <div class="p-field p-col-12 p-md-4">
       <label for="razaoSocial" class="required">Razão Social</label>
-      <input id="razaoSocial" type="text" pInputText [(ngModel)]="empresa.razaoSocial" required>
+      <input id="razaoSocial" type="text" pInputText name="razaoSocial" [(ngModel)]="empresa.razaoSocial" required>
     </div>
     <div class="p-field p-col-12 p-md-6">
       <label for="cep" class="required">CEP</label>
-      <p-inputMask id="cep" mask="99999-999" [(ngModel)]="empresa.cep" required></p-inputMask>
+      <p-inputMask id="cep" mask="99999-999" name="cep" [(ngModel)]="empresa.cep" required></p-inputMask>
       <button pButton type="button" icon="pi pi-check" iconPos="right" (click)="buscaEndereco()" label="Busca CEP"></button>
     </div>
     <div class="p-field p-col-12 p-md-6">
       <label for="estado" class="required">Estado</label>
-      <input id="estado" type="text" pInputText [(ngModel)]="empresa.estado" required>
+      <input id="estado" type="text" pInputText name="estado" [(ngModel)]="empresa.estado" required>
     </div>
     <div class="p-field p-col-12 p-md-6">
       <label for="logradouro" class="required">Logradouro</label>
-      <input id="logradouro" type="text" pInputText [(ngModel)]="empresa.logradouro" required>
+      <input id="logradouro" type="text" pInputText name="logradouro" [(ngModel)]="empresa.logradouro" required>
     </div>
     <div class="p-field p-col-12 p-md-6">
       <label for="complemento">Complemento</label>
-      <input id="complemento" type="text" pInputText [(ngModel)]="empresa.complemento">
+      <input id="complemento" type="text" pInputText name="complemento" [(ngModel)]="empresa.complemento">
     </div>
   </div>
   <div class="ui-fluid p-formgrid p-grid">

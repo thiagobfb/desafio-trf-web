@@ -8,6 +8,7 @@ import { EmpresaFormComponent } from './empresa/empresa-form/empresa-form.compon
 import { ButtonModule, DialogModule, DropdownModule, InputMaskModule, InputTextModule, TableModule } from 'primeng';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     DropdownModule,
     InputMaskModule,
     ButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
