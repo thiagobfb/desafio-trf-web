@@ -8,7 +8,7 @@
     <div class="p-field p-col-12 p-md-4">
       <label for="tipoEmpresa" class="required">Tipo de Empresa</label>
       <p-dropdown inputId="tipoEmpresa" name="tipoEmpresa" [options]="tipos" [(ngModel)]="empresa.tipoEmpresa"
-                  placeholder="Selecione um tipo" optionLabel="nome" (onChange)="buscarMatrizes()"
+                  placeholder="Selecione um tipo" (onChange)="buscarMatrizes()"
                   [showClear]="true" required></p-dropdown>
     </div>
     <div *ngIf="empresa.tipoEmpresa == 'FILIAL'" class="p-field p-col-12 p-md-8">
@@ -25,20 +25,32 @@
       <label for="razaoSocial" class="required">Razão Social</label>
       <input id="razaoSocial" type="text" pInputText name="razaoSocial" [(ngModel)]="empresa.razaoSocial" required>
     </div>
-    <div class="p-field p-col-12 p-md-6">
+    <div class="p-field p-col-12 p-md-3">
+      <label for="email" class="required">E-Mail</label>
+      <input id="email" type="text" pInputText name="email" [(ngModel)]="empresa.email" required>
+    </div>
+    <div class="p-field p-col-12 p-md-4">
+      <label for="contato" class="required">Contato</label>
+      <input id="contato" type="email" pInputText name="contato" [(ngModel)]="empresa.contato" required>
+    </div>
+    <div class="p-field p-col-12 p-md-3">
       <label for="cep" class="required">CEP</label>
       <p-inputMask id="cep" mask="99999-999" name="cep" [(ngModel)]="empresa.cep" required></p-inputMask>
       <button pButton type="button" icon="pi pi-check" iconPos="right" (click)="buscaEndereco()" label="Busca CEP"></button>
     </div>
-    <div class="p-field p-col-12 p-md-6">
+    <div class="p-field p-col-12 p-md-3">
       <label for="estado" class="required">Estado</label>
       <input id="estado" type="text" pInputText name="estado" [(ngModel)]="empresa.estado" required>
+    </div>
+    <div class="p-field p-col-12 p-md-4">
+      <label for="cidade" class="required">Cidade</label>
+      <input id="cidade" type="text" pInputText name="cidade" [(ngModel)]="empresa.cidade" required>
     </div>
     <div class="p-field p-col-12 p-md-6">
       <label for="logradouro" class="required">Logradouro</label>
       <input id="logradouro" type="text" pInputText name="logradouro" [(ngModel)]="empresa.logradouro" required>
     </div>
-    <div class="p-field p-col-12 p-md-6">
+    <div class="p-field p-col-12 p-md-4">
       <label for="complemento">Complemento</label>
       <input id="complemento" type="text" pInputText name="complemento" [(ngModel)]="empresa.complemento">
     </div>

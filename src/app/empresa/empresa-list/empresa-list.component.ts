@@ -42,9 +42,9 @@ export class EmpresaListComponent implements OnInit {
     };
     this.empresaService.buscarTodos(pageableData, this.cnpj, this.nomeEmpresa, this.selectedTipo).subscribe(
       dataPaginated => {
-        //console.log(' pageable data:', this.empresas.content);
+        // console.log(' pageable data:', this.empresas.content);
         this.empresas = dataPaginated;
-        this.total = dataPaginated['totalElements'];
+        this.total = dataPaginated.totalElements;
       },
       error => {
         console.log('error fetching paginated data', error);
@@ -74,7 +74,7 @@ export class EmpresaListComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.empresaService.excluir(id);
+    this.empresaService.excluir(id).subscribe(res => console.log('Deleted ' + res));
     this.displayDialog = false;
   }
 

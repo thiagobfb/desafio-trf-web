@@ -11,7 +11,7 @@
     <div class="p-field p-col">
       <label for="tipo">Tipo de Empresa&nbsp;</label>
       <p-dropdown inputId="tipo" [options]="tipos" [(ngModel)]="selectedTipo"
-                  optionLabel="label" [ngModelOptions]="{standalone: true}"
+                  [ngModelOptions]="{standalone: true}"
                   [showClear]="true"></p-dropdown>
     </div>
   </div>
@@ -60,8 +60,8 @@
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="pi pi-times" (click)="delete(empresaExclusao.id)" label="Confirmar"></button>
-      <button type="button" pButton icon="pi pi-check" (click)="cancelar()" label="Cancelar"></button>
+      <button type="button" pButton icon="pi pi-check" (click)="delete(empresaExclusao.id)" label="Confirmar"></button>
+      <button type="button" pButton icon="pi pi-times" (click)="cancelar()" label="Cancelar"></button>
     </div>
   </p-footer>
 </p-dialog>

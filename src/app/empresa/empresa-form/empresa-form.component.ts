@@ -13,8 +13,8 @@ import { EnderecoService } from '../endereco.service';
 export class EmpresaFormComponent implements OnInit {
 
   id: string;
-  tipos: SelectItem[];
-  matrizes: EmpresaModel[];
+  tipos: SelectItem[] = [];
+  matrizes: EmpresaModel[] = [];
   empresa: EmpresaModel;
   titulo: string;
 
@@ -26,7 +26,6 @@ export class EmpresaFormComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.tipos = [
-      { label: 'Todos', value: '' },
       { label: 'Matriz', value: 'MATRIZ' },
       { label: 'Filial', value: 'FILIAL' },
     ];
@@ -41,15 +40,17 @@ export class EmpresaFormComponent implements OnInit {
 
   buscaEndereco() {
     this.enderecoService.buscarEndereco(this.empresa.cep).subscribe(res => {
-      this.empresa.complemento = res.data.complemento;
-      this.empresa.logradouro = res.data.logradouro;
-      this.empresa.bairro = res.data.bairro;
-      this.empresa.cidade = res.data.localidade;
-      this.empresa.estado = res.data.uf;
+      this.empresa.complemento = res.complemento;
+      this.empresa.logradouro = res.logradouro;
+      this.empresa.bairro = res.bairro;
+      this.empresa.cidade = res.localidade;
+      this.empresa.estado = res.uf;
     });
   }
 
   salvarAtualizar() {
+    this.empresa.cnpj = this.empresa.cnpj.replace(/\D+/g, '');
+    this.empresa.cep = this.empresa.cep.replace(/\D+/g, '');
     if (this.id) {
       this.empresaService.atualizar(Number(this.id), this.empresa)
         .subscribe(res => console.log('Atualização efetuada com sucesso'));
