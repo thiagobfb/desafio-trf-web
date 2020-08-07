@@ -1,27 +1,27 @@
 <form #form="ngForm" novalidate>
   <div class="p-fluid p-formgrid p-grid">
     <div class="p-field p-col">
-      <label for="cnpj">CNPJ</label>
+      <label for="cnpj">CNPJ&nbsp;</label>
       <input id="cnpj" type="text" pInputText [(ngModel)]="cnpj" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="p-field p-col">
-      <label for="nome">Nome da Empresa</label>
+      <label for="nome">Nome da Empresa&nbsp;</label>
       <input id="nome" type="text" pInputText [(ngModel)]="nomeEmpresa" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="p-field p-col">
-      <label for="tipo">Tipo de Empresa</label>
+      <label for="tipo">Tipo de Empresa&nbsp;</label>
       <p-dropdown inputId="tipo" [options]="tipos" [(ngModel)]="selectedTipo"
-                  placeholder="Selecione um tipo" optionLabel="nome" [ngModelOptions]="{standalone: true}"
+                  [ngModelOptions]="{standalone: true}"
                   [showClear]="true"></p-dropdown>
     </div>
   </div>
   <div class="ui-helper-clearfix">
-    <button type="button" pButton icon="pi pi-check" [routerLink]="['/empresas']" label="Novo Cadastro"></button>
+    <button type="button" pButton icon="pi pi-check" [routerLink]="['/empresas']" label="Novo Cadastro"></button>&nbsp;
     <button type="button" pButton icon="pi pi-times" (click)="buscar()" label="Buscar"></button>
   </div>
 </form>
 
-<p-table [value]="empresas" [lazy]="true"
+<p-table [value]="empresas['content']" [lazy]="true"
          (onLazyLoad)="loadDataLazy($event)" dataKey="id" editMode="row"
          [totalRecords]="total" [paginator]="true" rows="5">
   <ng-template pTemplate="header">
@@ -32,24 +32,23 @@
       <th>Ações</th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-rowData let-editing="editing" let-ri="rowIndex">
-    <tr [pEditableRow]="rowData">
+  <ng-template pTemplate="body" let-empresa>
+    <tr [pEditableRow]="empresa">
       <td>
-        {{rowData.id}}
+        {{empresa['id']}}
       </td>
       <td>
-        <ng-template pTemplate="output">
-          {{rowData.nome}}
-        </ng-template>
+
+          {{empresa['nome']}}
+
       </td>
       <td>
-        <ng-template pTemplate="output">
-          {{rowData.cnpj}}
-        </ng-template>
+
+          {{empresa['cnpj']}}
       </td>
       <td>
-        <button pButton type="button" icon="pi pi-pencil" [routerLink]="['/empresas',rowData.id]"></button>
-        <button pButton type="button" icon="pi pi-trash" (click)="abrirModalExclusao(rowData)"></button>
+        <button pButton type="button" icon="pi pi-pencil" [routerLink]="['/empresas',empresa.id]"></button>
+        <button pButton type="button" icon="pi pi-trash" (click)="abrirModalExclusao(empresa)"></button>
       </td>
     </tr>
   </ng-template>
@@ -61,8 +60,8 @@
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="pi pi-times" (click)="delete(empresaExclusao.id)" label="Confirmar"></button>
-      <button type="button" pButton icon="pi pi-check" (click)="cancelar()" label="Cancelar"></button>
+      <button type="button" pButton icon="pi pi-check" (click)="delete(empresaExclusao.id)" label="Confirmar"></button>
+      <button type="button" pButton icon="pi pi-times" (click)="cancelar()" label="Cancelar"></button>
     </div>
   </p-footer>
 </p-dialog>

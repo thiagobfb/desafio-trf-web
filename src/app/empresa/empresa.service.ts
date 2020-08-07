@@ -9,17 +9,26 @@ import { PageableModel } from '../models/pageable.model';
 })
 export class EmpresaService {
 
-  endpointAPI = environment.baseURL;
-
   constructor(private http: HttpClient) { }
 
+  endpointAPI = environment.baseURL;
+
   buscarTodos(pageable?: PageableModel, cnpj?: string, nome?: string, tipoEmpresa?: string) {
-    const params = new HttpParams();
-    params.append('page', pageable.page.toString());
-    params.append('size', pageable.size.toString());
-    params.append('cnpj', cnpj);
-    params.append('nome', nome);
-    params.append('tipoEmpresa', tipoEmpresa);
+    let params = new HttpParams()
+      .append('page', pageable.page.toString())
+      .append('size', pageable.size.toString());
+
+    if (cnpj != null) {
+      params = params.append('cnpj', cnpj);
+    }
+
+    if (nome != null) {
+      params = params.append('nome', nome);
+    }
+
+    if (tipoEmpresa != null) {
+      params = params.append('tipoEmpresa', tipoEmpresa);
+    }
 
     return this.http.get<any>(`${this.endpointAPI}/empresas`, {params});
   }

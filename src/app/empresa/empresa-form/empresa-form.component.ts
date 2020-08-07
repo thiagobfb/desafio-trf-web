@@ -13,21 +13,9 @@ import { EnderecoService } from '../endereco.service';
 export class EmpresaFormComponent implements OnInit {
 
   id: string;
-  tipos: SelectItem[];
-  matrizes: EmpresaModel[];
-  empresa: EmpresaModel = { estado: null,
-                            cidade: null,
-                            complemento: null,
-                            tipoEmpresa: null,
-                            bairro: null,
-                            logradouro: null,
-                            nome: null,
-                            cnpj: null,
-                            razaoSocial: null,
-                            contato: null,
-                            email: null,
-                            cep: null,
-                            matriz: null};
+  tipos: SelectItem[] = [];
+  matrizes: EmpresaModel[] = [];
+  empresa: EmpresaModel;
   titulo: string;
 
   constructor(private route: ActivatedRoute,
@@ -38,12 +26,11 @@ export class EmpresaFormComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.tipos = [
-      { label: 'Todos', value: '' },
       { label: 'Matriz', value: 'MATRIZ' },
       { label: 'Filial', value: 'FILIAL' },
     ];
 
-    this.id ? this.editarEmpresa() : this.titulo = 'Cadastro de Empresa';
+    this.id ? this.editarEmpresa() : this.preparaCadastro();
   }
 
   editarEmpresa() {
@@ -53,15 +40,17 @@ export class EmpresaFormComponent implements OnInit {
 
   buscaEndereco() {
     this.enderecoService.buscarEndereco(this.empresa.cep).subscribe(res => {
-      this.empresa.complemento = res.data.complemento;
-      this.empresa.logradouro = res.data.logradouro;
-      this.empresa.bairro = res.data.bairro;
-      this.empresa.cidade = res.data.localidade;
-      this.empresa.estado = res.data.uf;
+      this.empresa.complemento = res.complemento;
+      this.empresa.logradouro = res.logradouro;
+      this.empresa.bairro = res.bairro;
+      this.empresa.cidade = res.localidade;
+      this.empresa.estado = res.uf;
     });
   }
 
   salvarAtualizar() {
+    this.empresa.cnpj = this.empresa.cnpj.replace(/\D+/g, '');
+    this.empresa.cep = this.empresa.cep.replace(/\D+/g, '');
     if (this.id) {
       this.empresaService.atualizar(Number(this.id), this.empresa)
         .subscribe(res => console.log('Atualização efetuada com sucesso'));
@@ -74,5 +63,24 @@ export class EmpresaFormComponent implements OnInit {
 
   buscarMatrizes() {
     this.empresaService.buscarMatrizes().subscribe(res => this.matrizes = res);
+  }
+
+  private preparaCadastro() {
+    this.titulo = 'Cadastro de Empresa';
+    this.empresa = {
+      estado: null,
+      cidade: null,
+      complemento: null,
+      tipoEmpresa: null,
+      bairro: null,
+      logradouro: null,
+      nome: null,
+      cnpj: null,
+      razaoSocial: null,
+      contato: null,
+      email: null,
+      cep: null,
+      matriz: null
+    };
   }
 }
